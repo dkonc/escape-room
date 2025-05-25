@@ -22,7 +22,7 @@ const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         justifyContent: "center",
         alignItems: "center",
         background: `radial-gradient(circle at center, rgba(255, 215, 0, 0.3) 0%, rgba(255, 99, 71, 0.3) 70%),
-                     linear-gradient(135deg, #4a148c 0%, #880e4f 100%)`,
+                     linear-gradient(135deg,rgb(74, 20, 140) 0%, #880e4f 100%)`,
         color: "#f0e6ff",
         textAlign: "center",
         padding: "2rem",
