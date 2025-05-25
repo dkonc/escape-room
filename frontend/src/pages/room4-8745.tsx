@@ -59,7 +59,7 @@ const Room4: React.FC = () => {
     });
 
     if (correct === 17 && selected.size === 17) {
-      navigate("/gift");
+      navigate("/gift-87654");
     } else if (selected.size <= 10) {
       setMessage(
         `Izbrati moraš vsaj 13 držav, da ne bo prelahko. Iščeš jih 17.`
@@ -71,8 +71,8 @@ const Room4: React.FC = () => {
 
   return (
     <div style={{ padding: "2rem", textAlign: "center" }}>
-      <h1>Res je. Sedaj pa malo težje... Skoraj si na koncu.</h1>
-      <p>Kje sem (bil)? :D </p>
+      <h1>Res je. Še zadnji preizkus</h1>
+      <p>Test poznanstva. Kje vse sem bil? Iščeš 17 držav. </p>
 
       <div
         style={{

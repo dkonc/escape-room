@@ -47,7 +47,10 @@ const Room3 = () => {
         }}
       >
         {/* Question */}
-        <h1 style={{ margin: 0, textAlign: "center" }}>Kje sem?</h1>
+        <h1 style={{ margin: 0, textAlign: "center" }}>
+          Ne moreš je videti, lahko pa jo izračunaš. Ne slišiš je, a veš, da
+          raste. Začelo se je na ponedeljek. Koliko dni je minilo?
+        </h1>
 
         {/* Input */}
         <input
@@ -63,7 +66,7 @@ const Room3 = () => {
             boxSizing: "border-box",
             border: "2px solid #880e4f",
           }}
-          placeholder="Vnesi odgovor..."
+          placeholder="Vnesi številko..."
         />
 
         {/* Submit Button */}

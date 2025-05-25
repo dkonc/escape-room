@@ -11,6 +11,7 @@ import NextRoom from "./pages/next-room-4521";
 import Room2 from "./pages/room2-8392";
 import Room3 from "./pages/room3-1045";
 import Room4 from "./pages/room4-8745";
+import Gift from "./pages/gift-87654";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -23,6 +24,7 @@ const AnimatedRoutes = () => {
         <Route path="/room2-8392" element={<Room2 />} />
         <Route path="/room3-1045" element={<Room3 />} />
         <Route path="/room4-8745" element={<Room4 />} />
+        <Route path="/gift-87654" element={<Gift />} />
 
         <Route path="/failed" element={<Failed />} />
       </Routes>
