@@ -1,8 +1,12 @@
+import PageWrapper from "../components/PageWrapper";
+
 const NextRoom = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-green-900 text-white">
-      <h1 className="text-3xl">Welcome to the next room.</h1>
-    </div>
+    <PageWrapper>
+      <h1 style={{ fontSize: "3rem", color: "lime" }}>
+        Dobrodošla v naslednji uganki!
+      </h1>
+    </PageWrapper>
   );
 };
 
