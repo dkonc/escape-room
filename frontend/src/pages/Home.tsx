@@ -38,7 +38,7 @@ const Home = () => {
       });
 
       if (records.length > 0) {
-        navigate("/next-room");
+        navigate("/next-room-4521");
       } else {
         const newCount = await incrementGlobalAttempts();
         setAttempts(newCount);
@@ -71,7 +71,10 @@ const Home = () => {
           <h1>
             Vse najboljše! Na žalost se je tvoje darilo ujelo v mrežo ugank...
           </h1>
-          <h2>Za nadaljevanje potrebuješ geslo:</h2>
+          <h2>
+            Za nadaljevanje potrebuješ geslo - ki ga že imaš, samo mogoče ne
+            veš:
+          </h2>
           <p
             style={{
               marginTop: "0.5rem",
