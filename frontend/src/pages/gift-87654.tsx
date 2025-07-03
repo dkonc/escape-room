@@ -9,14 +9,14 @@ const Gift: React.FC = () => {
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#121212",
-        color: "#fff",
+        color: "#1c1c1c",
         fontSize: "12rem",
         fontWeight: "bold",
         letterSpacing: "1rem",
         userSelect: "none",
       }}
     >
-      G I F T E
+      H E L S E
     </div>
   );
 };

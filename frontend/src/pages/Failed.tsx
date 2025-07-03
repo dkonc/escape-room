@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PageWrapper from "../components/PageWrapper";
-import { color } from "framer-motion";
 
 const Failed = () => {
   const navigate = useNavigate();
