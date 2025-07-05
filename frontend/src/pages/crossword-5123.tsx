@@ -297,7 +297,7 @@ const Hints = () => (
   </div>
 );
 
-const Gift = () => {
+const CrosswordPage = () => {
   const [input, setInput] = useState("");
   const [status, setStatus] = useState<"idle" | "success" | "fail" | "loading">(
     "idle"
@@ -515,4 +515,4 @@ const Gift = () => {
   );
 };
 
-export default Gift;
+export default CrosswordPage;
