@@ -38,7 +38,7 @@ const Home = () => {
       });
 
       if (records.length > 0) {
-        navigate("/next-room-4521");
+        navigate("/PageDown");
       } else {
         const newCount = await incrementGlobalAttempts();
         setAttempts(newCount);
