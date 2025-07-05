@@ -415,7 +415,7 @@ const Gift = () => {
         </form>
         {status === "success" && (
           <div style={{ color: "#388e3c", marginTop: 12, fontWeight: 700 }}>
-            Pravilno! Kam pa sedaj s tem? 👀
+            Pravilno! Kam pa sedaj s tem? 👀🔑
           </div>
         )}
         {status === "fail" && (
