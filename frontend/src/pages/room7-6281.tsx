@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import pb from "../pb";
 import PageWrapper from "../components/PageWrapper";
 import { incrementRoom1Hint } from "../attemptsService";
-import slika from "../assets/kenguru2.png";
+import slika from "../assets/kenguru3.png";
 
-const Room6 = () => {
+const Room7 = () => {
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
   const [input3, setInput3] = useState("");
@@ -20,25 +20,21 @@ const Room6 = () => {
 
     const val1 = input1.trim().toLowerCase();
     const val2 = input2.trim().toLowerCase();
-    const val3 = input3.trim().toLowerCase();
 
     try {
       const rec1 = await pb.collection("puzzles").getFullList({
-        filter: `roomId = "room6-1" && answer = "${val1}"`,
+        filter: `roomId = "room7-1" && answer = "${val1}"`,
       });
       const rec2 = await pb.collection("puzzles").getFullList({
-        filter: `roomId = "room6-2" && answer = "${val2}"`,
-      });
-      const rec3 = await pb.collection("puzzles").getFullList({
-        filter: `roomId = "room6-3" && answer = "${val3}"`,
+        filter: `roomId = "room7-2" && answer = "${val2}"`,
       });
 
-      const allCorrect = rec1.length > 0 && rec2.length > 0 && rec3.length > 0;
+      const allCorrect = rec1.length > 0 && rec2.length > 0;
       setIncorrect(!allCorrect);
 
       if (allCorrect) {
         setError("");
-        navigate("/room7-6281");
+        navigate("/room8-2336");
       } else {
         setError("Poskusi znova. Napačen vnos.");
       }
@@ -62,13 +58,11 @@ const Room6 = () => {
   return (
     <PageWrapper>
       <form onSubmit={handleSubmit}>
-        <p>Pa preveriva še tvoje matematične sposobnosti.</p>
         <h1 style={{ maxWidth: "720px", fontSize: "1.5rem" }}>
-          Ana je na vsakega izmed 3 kartončkov napisala petmestno število, vsota
-          3 napisanih petmestnih števil je bila 57263. Nato je kartončke
-          položila na mizo, tako da so bile 3 števke prekrite (glej sliko). Ali
-          lahko Rok ugotovi, katere števke so bile prekrite? Zapiši jih v
-          naraščajočem vrstnem redu.
+          Če Rok ne bi bil barvno slep, bi pobarval vsak krog v diagramu rdeče,
+          rumeno ali zeleno, tako da nobena 2 sosednja povezana kroga ne bi bila
+          pobarvana z isto barvo. Katera 2 kroga bi Rok zagotovo pobarval z isto
+          barvo?
         </h1>
         <img
           height={"150px"}
@@ -103,22 +97,6 @@ const Room6 = () => {
             type="text"
             value={input2}
             onChange={(e) => setInput2(e.target.value)}
-            maxLength={1}
-            style={{
-              width: "0.5em",
-              height: "0.5em",
-              fontSize: "2em",
-              textAlign: "center",
-              border: incorrect ? "2px solid #d81b60" : "2px solid #880e4f",
-              background: incorrect ? "#fce4ec" : "#fff",
-              borderRadius: "8px",
-              transition: "border 0.2s, background 0.2s",
-            }}
-          />
-          <input
-            type="text"
-            value={input3}
-            onChange={(e) => setInput3(e.target.value)}
             maxLength={1}
             style={{
               width: "0.5em",
@@ -236,7 +214,7 @@ const Room6 = () => {
             >
               ×
             </button>
-            A je res tok težko? Če ne pa poklič Ano.
+            Rešitev = "tvoja starost" + "polnoletnost"
           </div>
         </div>
       )}
@@ -244,4 +222,4 @@ const Room6 = () => {
   );
 };
 
-export default Room6;
+export default Room7;
