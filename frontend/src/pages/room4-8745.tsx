@@ -9,10 +9,9 @@ const correctCountries = new Set(["United Kingdom"]);
 
 const Room4: React.FC = () => {
   const [selected, setSelected] = useState<Set<string>>(new Set());
-  const [selectedList, setSelectedList] = useState<string[]>([]);
+  const [, setSelectedList] = useState<string[]>([]);
   const [message, setMessage] = useState("");
-  const [showHint, setShowHint] = useState(false);
-  const [showHint2, setShowHint2] = useState(false);
+
   const navigate = useNavigate();
 
   const toggleCountry = (countryName: string) => {

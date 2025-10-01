@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import pb from "../pb";
 import PageWrapper from "../components/PageWrapper";
-import { getGlobalAttempts, incrementGlobalAttempts } from "../attemptsService";
+import { getGlobalAttempts } from "../attemptsService";
 
 const CookiePopup = () => {
   const [visible, setVisible] = useState(true);
@@ -58,9 +57,8 @@ const CookiePopup = () => {
 };
 
 const Home = () => {
-  const [input, setInput] = useState("");
   const [error, setError] = useState("");
-  const [attempts, setAttempts] = useState<number | null>(null);
+  const [, setAttempts] = useState<number | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {

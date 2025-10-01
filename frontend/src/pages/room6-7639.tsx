@@ -12,7 +12,6 @@ const Room6 = () => {
   const [error, setError] = useState("");
   const [showHint, setShowHint] = useState(false);
   const [hintLoading, setHintLoading] = useState(false);
-  const [showHint2, setShowHint2] = useState(false);
   const [incorrect, setIncorrect] = useState([false, false, false]);
   const navigate = useNavigate();
 
@@ -70,20 +69,24 @@ const Room6 = () => {
     <PageWrapper>
       <form onSubmit={handleSubmit}>
         <p>Pa preveriva še tvoje matematične sposobnosti.</p>
-        <h1 style={{ maxWidth: "720px" }}>
+        <h1 style={{ maxWidth: "720px", fontSize: "1.5rem" }}>
           Ana je na vsakega izmed 3 kartončkov napisala petmestno število, vsota
           3 napisanih petmestnih števil je bila 57263. Nato je kartončke
           položila na mizo, tako da so bile 3 števke prekrite (glej sliko). Ali
           lahko Rok ugotovi, katere števke so bile prekrite? Zapiši jih v
           naraščajočem vrstnem redu.
         </h1>
-        <img src={slika} alt="Kartončki z napisanimi številkami"></img>
+        <img
+          height={"150px"}
+          src={slika}
+          alt="Kartončki z napisanimi številkami"
+        ></img>
         <div
           style={{
             display: "flex",
             justifyContent: "center",
             gap: "1rem",
-            margin: "2rem 0",
+            margin: "0.5rem 0",
           }}
         >
           <input
@@ -92,7 +95,8 @@ const Room6 = () => {
             onChange={(e) => setInput1(e.target.value)}
             maxLength={1}
             style={{
-              width: "3em",
+              width: "0.5em",
+              height: "0.5em",
               fontSize: "2em",
               textAlign: "center",
               border: incorrect[0] ? "2px solid #d81b60" : "2px solid #880e4f",
@@ -107,7 +111,8 @@ const Room6 = () => {
             onChange={(e) => setInput2(e.target.value)}
             maxLength={1}
             style={{
-              width: "3em",
+              width: "0.5em",
+              height: "0.5em",
               fontSize: "2em",
               textAlign: "center",
               border: incorrect[1] ? "2px solid #d81b60" : "2px solid #880e4f",
@@ -122,7 +127,8 @@ const Room6 = () => {
             onChange={(e) => setInput3(e.target.value)}
             maxLength={1}
             style={{
-              width: "3em",
+              width: "0.5em",
+              height: "0.5em",
               fontSize: "2em",
               textAlign: "center",
               border: incorrect[2] ? "2px solid #d81b60" : "2px solid #880e4f",
@@ -137,13 +143,11 @@ const Room6 = () => {
             display: "flex",
             justifyContent: "center",
             gap: "1rem",
-            marginTop: "1.5rem",
           }}
         >
           <button
             type="submit"
             style={{
-              padding: "1rem",
               fontSize: "1.25rem",
               borderRadius: "12px",
               backgroundColor: "#880e4f",

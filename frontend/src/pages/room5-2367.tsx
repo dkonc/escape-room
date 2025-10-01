@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import pb from "../pb";
 import PageWrapper from "../components/PageWrapper";
 
 const COUSINE_TYPES = [
