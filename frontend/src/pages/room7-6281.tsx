@@ -8,7 +8,6 @@ import slika from "../assets/kenguru3.png";
 const Room7 = () => {
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
-  const [input3, setInput3] = useState("");
   const [error, setError] = useState("");
   const [showHint, setShowHint] = useState(false);
   const [hintLoading, setHintLoading] = useState(false);

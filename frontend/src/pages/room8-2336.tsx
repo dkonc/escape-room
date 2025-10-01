@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import pb from "../pb";
 import PageWrapper from "../components/PageWrapper";
-import { incrementRoom1Hint } from "../attemptsService";
 
 const Room8 = () => {
   const [input1, setInput1] = useState("");
   const [error, setError] = useState("");
-  const [showHint, setShowHint] = useState(false);
-  const [hintLoading, setHintLoading] = useState(false);
   const [incorrect, setIncorrect] = useState(false);
   const navigate = useNavigate();
 
@@ -35,17 +32,6 @@ const Room8 = () => {
       setError("Poskusi znova.");
       setIncorrect(true);
     }
-  };
-
-  const handleShowHint = async () => {
-    setHintLoading(true);
-    setShowHint(true);
-    try {
-      await incrementRoom1Hint();
-    } catch {
-      // ignore error, still show hint
-    }
-    setHintLoading(false);
   };
 
   return (

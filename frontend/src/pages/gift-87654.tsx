@@ -1,21 +1,28 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Lottie from "lottie-react";
+import type { LottieRefCurrentProps } from "lottie-react";
 import giftBoxAnimation from "../assets/Gift-Box.json";
 
 const Gift = () => {
   const [showPopup, setShowPopup] = useState(false);
-  const lottieRef = useRef(null);
+  const lottieRef = useRef<LottieRefCurrentProps>(null);
 
   // Show popup 1 second before animation ends
   const handleLottieComplete = () => {
     setShowPopup(true);
   };
 
-  const handleLottieEnterFrame = (e: { currentTime: any }) => {
+  const handleLottieEnterFrame = (e: any) => {
+    // BMEnterFrameEvent should have currentTime property
     const totalFrames = lottieRef.current?.getDuration(true);
-    const currentFrame = e.currentTime;
+    const currentFrame = e?.currentTime;
     // Show popup 1 second before end (assuming 60fps)
-    if (totalFrames && currentFrame >= totalFrames - 60 && !showPopup) {
+    if (
+      totalFrames &&
+      typeof currentFrame === "number" &&
+      currentFrame >= totalFrames - 60 &&
+      !showPopup
+    ) {
       setShowPopup(true);
     }
   };
@@ -74,7 +81,7 @@ const Gift = () => {
             style={{
               position: "fixed",
               left: "50%",
-              bottom: "20%",
+              bottom: "15%",
               transform: "translateX(-50%)",
               borderRadius: "16px",
               padding: "18px 32px",
@@ -88,8 +95,8 @@ const Gift = () => {
             }}
           >
             Čestitke! Uspešno si rešil vse naloge in si zaslužiš darilo! 🎉
-            Geslo v zgornjem oknu bo tvoj ključ do ZIP datoteke, kjer te čaka
-            presenečenje – tvoje rojstnodnevno darilo!
+            Geslo v zgornjem oknu bo tvoj ključ za odklepanje ZIP datoteke, kjer
+            te čaka presenečenje – tvoje rojstnodnevno darilo!
           </div>
         </>
       )}
