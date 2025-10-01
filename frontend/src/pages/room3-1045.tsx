@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import pb from "../pb";
 import PageWrapper from "../components/PageWrapper";
+import slika from "../assets/kenguru.png";
 
 const Room3 = () => {
   const [input, setInput] = useState("");
@@ -25,10 +26,11 @@ const Room3 = () => {
       ) {
         navigate("/room4-8745");
       } else {
-        navigate("/failed");
+        setError("Napačen odgovor, poskusi znova.");
+        navigate("/room3-1045");
       }
     } catch (err) {
-      setError("Failed to check answer, please try again.");
+      setError("Nekaj je šlo narobe, piši Ani.");
       console.error(err);
     } finally {
       setLoading(false);
@@ -50,15 +52,30 @@ const Room3 = () => {
             alignItems: "center",
             gap: "1.25rem",
             width: "100%",
-            maxWidth: "360px",
+            maxWidth: "560px",
           }}
         >
           {/* Question */}
-          <h1 style={{ margin: 0, textAlign: "center" }}>
-            Ne moreš je videti, lahko pa jo izračunaš. Ne slišiš je, a veš, da
-            raste. Začelo se je na ponedeljek. Koliko dni?
+          <h1
+            style={{
+              margin: 0,
+              textAlign: "center",
+              fontSize: "1.5rem",
+              width: "100%",
+            }}
+          >
+            Štromarka Ana je z žicami povezala nekaj luči (glej sliko). Če
+            prižge katerokoli luč, se prižgejo tudi vse luči, ki so s to lučjo
+            neposredno povezane. Na začetku so vse luči ugasnjene. Najmanj
+            koliko luči mora prižgati Ana, da bodo prižgane vse luči?
           </h1>
-
+          <img
+            src={slika}
+            alt="Kenguru"
+            style={{ width: "300px", height: "auto", borderRadius: "16px" }}
+          />
+        </div>
+        <div>
           {/* Input */}
           <input
             type="text"
@@ -99,7 +116,7 @@ const Room3 = () => {
               if (!loading) e.currentTarget.style.backgroundColor = "#880e4f";
             }}
           >
-            Oddaj
+            Preveri
           </button>
 
           {/* Hint Button */}
@@ -111,12 +128,12 @@ const Room3 = () => {
               borderRadius: "12px",
               fontSize: "1.25rem",
               width: "100%",
-              backgroundColor: "#FFD700",
-              color: "#880e4f",
+              backgroundColor: "#2fc9b5ff",
+              color: "#000000ff",
               fontWeight: "bold",
               border: "none",
               cursor: "pointer",
-              boxShadow: "0 0 8px #FFD70088",
+              boxShadow: "0 0 8px #00000088",
             }}
           >
             Namig
@@ -126,9 +143,10 @@ const Room3 = () => {
           {error && (
             <p
               style={{
-                color: "red",
-                marginTop: "0.5rem",
-                textAlign: "center",
+                color: "black",
+                marginTop: "1rem",
+                fontSize: "24px",
+                fontWeight: "bold",
               }}
             >
               {error}
@@ -192,8 +210,7 @@ const Room3 = () => {
             >
               ×
             </button>
-            Pošlji mi lokacijo, kjer misliš, da lahko dobimo dobro hrano na
-            tripu za namig.
+            A si mislu, da bo dejansko vsak hint uporaben? Kr mal se potrud!
           </div>
         </div>
       )}

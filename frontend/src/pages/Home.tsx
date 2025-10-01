@@ -1,9 +1,61 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import pb from "../pb";
 import PageWrapper from "../components/PageWrapper";
 import { getGlobalAttempts, incrementGlobalAttempts } from "../attemptsService";
+
+const CookiePopup = () => {
+  const [visible, setVisible] = useState(true);
+
+  if (!visible) return null;
+
+  return (
+    <div
+      style={{
+        position: "fixed",
+        bottom: 24,
+        left: "50%",
+        transform: "translateX(-50%)",
+        background: "#fff",
+        color: "#880e4f",
+        borderRadius: 16,
+        boxShadow: "0 2px 16px #0002",
+        padding: "20px 32px",
+        zIndex: 9999,
+        maxWidth: 340,
+        textAlign: "center",
+        fontSize: "1.05em",
+        border: "2px solid #880e4f",
+      }}
+    >
+      <div>
+        To rojstnodnevno darilo uporablja čokoladne piškotke za zagotavljanje
+        boljše uporabniške (Rokove) izkušnje.
+        <br />
+        <br />S klikom na spodnji gumb potrjuješ prejem prvega darila: “Anini
+        home-made čokoladni piškotki”.
+      </div>
+      <button
+        style={{
+          marginTop: 18,
+          padding: "10px 22px",
+          borderRadius: 10,
+          border: "none",
+          background: "#880e4f",
+          color: "#fff",
+          fontWeight: "bold",
+          fontSize: "1em",
+          cursor: "pointer",
+          boxShadow: "0 1px 6px #880e4f33",
+        }}
+        onClick={() => setVisible(false)}
+      >
+        Sprejmi piškotke
+      </button>
+    </div>
+  );
+};
 
 const Home = () => {
   const [input, setInput] = useState("");
@@ -31,22 +83,7 @@ const Home = () => {
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const records = await pb.collection("access").getFullList({
-        filter: `password="${input}"`,
-      });
-
-      if (records.length > 0) {
-        navigate("/PageDown");
-      } else {
-        const newCount = await incrementGlobalAttempts();
-        setAttempts(newCount);
-        navigate("/failed");
-      }
-    } catch {
-      setError("Something went wrong.");
-    }
+    navigate("/PageDown");
   };
 
   return (
@@ -60,8 +97,7 @@ const Home = () => {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          background: `radial-gradient(circle at center, rgba(255, 215, 0, 0.3) 0%, rgba(255, 99, 71, 0.3) 70%), 
-                 linear-gradient(135deg, #4a148c 0%, #880e4f 100%)`,
+          background: `radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, rgba(71, 152, 255, 0.3) 70%), linear-gradient(135deg, rgb(20, 134, 140) 0%, rgba(58, 91, 190, 0.84) 100%)`,
           color: "#f0e6ff",
           textAlign: "center",
           padding: "2rem",
@@ -71,19 +107,6 @@ const Home = () => {
           <h1>
             Vse najboljše! Na žalost se je tvoje darilo ujelo v mrežo ugank...
           </h1>
-          <h2>
-            Za nadaljevanje potrebuješ geslo - ki ga že imaš, samo mogoče ne
-            veš:
-          </h2>
-          <p
-            style={{
-              marginTop: "0.5rem",
-              fontSize: "1rem",
-              color: "rgba(255,255,255,0.9)",
-            }}
-          >
-            Imaš samo 5 poskusov, potem pridejo dodatne ovire...
-          </p>
           <p
             style={{
               fontSize: "1.25rem",
@@ -91,33 +114,15 @@ const Home = () => {
               color: "rgba(255,255,255,0.95)",
             }}
           >
-            {attempts !== null ? (
-              <>
-                <strong>Trenutni poskusi:</strong>
-                <br />
-                <span style={{ fontSize: "2rem" }}>{attempts}</span>
-              </>
-            ) : (
-              "Loading..."
-            )}
+            Dragi Rok, v nadaljevanju te čaka X ugank, ki bodo razgibale tvoje
+            (sedaj že nekoliko starejše) možgančke. 😉 Nekatera vprašanja so
+            osebna in se nanašajo na naju, druga pa so bolj matematične ali
+            logične narave. Saj veš – cilj ni le zabava, ampak tudi preizkusiti
+            spomin, logiko in druge kognitivne sposobnosti. Brez skrbi – število
+            poskusov za reševanje ni omejeno, zato lahko po potrebi večkrat
+            premisliš in popravljaš odgovore. 💪 In ne pozabi: na koncu tega
+            »testa« te čaka zaslužena nagrada 🍪 Srečno!
           </p>
-
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "1rem",
-              borderRadius: "12px",
-              border: "none",
-              fontSize: "1.25rem",
-              marginTop: "1.5rem",
-              boxShadow: "0 0 8px rgba(255, 255, 255, 0.7)",
-              backgroundColor: "rgba(255, 255, 255, 0.2)",
-              color: "#fff",
-            }}
-          />
 
           <button
             type="submit"
@@ -144,7 +149,7 @@ const Home = () => {
               e.currentTarget.style.color = "#FF6347";
             }}
           >
-            Oddaj
+            Nadaljuj
           </button>
 
           {error && (
@@ -154,6 +159,7 @@ const Home = () => {
           )}
         </form>
       </div>
+      <CookiePopup />
     </PageWrapper>
   );
 };

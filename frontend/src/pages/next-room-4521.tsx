@@ -2,33 +2,54 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import pb from "../pb";
 import PageWrapper from "../components/PageWrapper";
-import { incrementRoom1Hint } from "../attemptsService"; // <-- add this import
+import { incrementRoom1Hint } from "../attemptsService";
 
 const NextRoom = () => {
-  const [answer, setAnswer] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
   const [error, setError] = useState("");
   const [showHint, setShowHint] = useState(false);
   const [hintLoading, setHintLoading] = useState(false);
-  const [showHint2, setShowHint2] = useState(false); // <-- add state for Namig 2
+  const [showHint2, setShowHint2] = useState(false);
+  const [monthIncorrect, setMonthIncorrect] = useState(false);
+  const [yearIncorrect, setYearIncorrect] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const normalized = answer.trim().toLowerCase();
+    const normalizedMonth = month.trim().toLowerCase();
+    const normalizedYear = year.trim().toLowerCase();
 
     try {
-      const records = await pb.collection("puzzles").getFullList({
-        filter: `roomId = "room1" && answer = "${normalized}"`,
+      const monthRecord = await pb.collection("puzzles").getFullList({
+        filter: `roomId = "room1-1" && answer = "${normalizedMonth}"`,
+      });
+      const yearRecord = await pb.collection("puzzles").getFullList({
+        filter: `roomId = "room1-2" && answer = "${normalizedYear}"`,
       });
 
-      if (records.length > 0) {
+      setMonthIncorrect(monthRecord.length === 0);
+      setYearIncorrect(yearRecord.length === 0);
+
+      if (monthRecord.length > 0 && yearRecord.length > 0) {
+        setError("");
         navigate("/room2-8392");
       } else {
-        navigate("/failed");
+        let errorMsg = "Poskusi znova. Napačen vnos: ";
+        if (monthRecord.length === 0 && yearRecord.length === 0) {
+          errorMsg += "mesec in leto.";
+        } else if (monthRecord.length === 0) {
+          errorMsg += "mesec.";
+        } else if (yearRecord.length === 0) {
+          errorMsg += "leto.";
+        }
+        setError(errorMsg);
       }
     } catch (err) {
-      setError("Something went wrong. Try again.");
+      setError("Poskusi znova.");
+      setMonthIncorrect(false);
+      setYearIncorrect(false);
     }
   };
 
@@ -46,21 +67,45 @@ const NextRoom = () => {
   return (
     <PageWrapper>
       <form onSubmit={handleSubmit}>
-        <h1>Rešitev: Brižinski spomeniki od Davida Konca</h1>
-        <p>Zmedenost je del poti do rešitve. </p>
+        <p>
+          Ker vem, da si zgodovinski navdušenec začniva z naslednjim vprašanjem:
+        </p>
+        <h1 style={{ maxWidth: "520px" }}>
+          Katerega meseca in katerega leta sem se kot študentka pridružila
+          Innbox ekipi?
+        </h1>
+        <p>Sem vnesi mesec:</p>
         <input
           type="text"
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
+          value={month}
+          onChange={(e) => setMonth(e.target.value)}
           style={{
             padding: "1rem",
             borderRadius: "12px",
             fontSize: "1.25rem",
             width: "100%",
             marginTop: "1rem",
+            border: monthIncorrect ? "2px solid #d81b60" : "2px solid #880e4f",
+            background: monthIncorrect ? "#fce4ec" : "#fff",
+            transition: "border 0.2s, background 0.2s",
           }}
         />
-        {/* Centered button group */}
+        <p>Sem vnesi leto:</p>
+        <input
+          type="text"
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+          style={{
+            padding: "1rem",
+            borderRadius: "12px",
+            fontSize: "1.25rem",
+            width: "100%",
+            marginTop: "1rem",
+            border: yearIncorrect ? "2px solid #d81b60" : "2px solid #880e4f",
+            background: yearIncorrect ? "#fce4ec" : "#fff",
+            transition: "border 0.2s, background 0.2s",
+          }}
+        />
         <div
           style={{
             display: "flex",
@@ -75,12 +120,12 @@ const NextRoom = () => {
               padding: "1rem",
               fontSize: "1.25rem",
               borderRadius: "12px",
-              backgroundColor: "#fff",
-              color: "#880e4f",
+              backgroundColor: "#880e4f",
+              color: "white",
               fontWeight: "bold",
             }}
           >
-            Oddaj
+            Preveri
           </button>
           <button
             type="button"
@@ -90,12 +135,12 @@ const NextRoom = () => {
               padding: "1rem",
               fontSize: "1.25rem",
               borderRadius: "12px",
-              backgroundColor: "#FFD700",
-              color: "#880e4f",
+              backgroundColor: "#2fc9b5ff",
+              color: "#000000ff",
               fontWeight: "bold",
               border: "none",
               cursor: "pointer",
-              boxShadow: "0 0 8px #FFD70088",
+              boxShadow: "0 0 8px #00000088",
             }}
           >
             Namig
@@ -107,18 +152,29 @@ const NextRoom = () => {
               padding: "1rem",
               fontSize: "1.25rem",
               borderRadius: "12px",
-              backgroundColor: "#90caf9",
-              color: "#0d47a1",
+              backgroundColor: "#2fc9b5ff",
+              color: "#000000ff",
               fontWeight: "bold",
               border: "none",
               cursor: "pointer",
-              boxShadow: "0 0 8px #90caf988",
+              boxShadow: "0 0 8px #00000088",
             }}
           >
             Namig 2
           </button>
         </div>
-        {error && <p style={{ color: "red", marginTop: "1rem" }}>{error}</p>}
+        {error && (
+          <p
+            style={{
+              color: "black",
+              marginTop: "1rem",
+              fontSize: "24px",
+              fontWeight: "bold",
+            }}
+          >
+            {error}
+          </p>
+        )}
       </form>
       {/* First hint popup */}
       {showHint && (
@@ -156,7 +212,6 @@ const NextRoom = () => {
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* X button absolutely positioned in top right */}
             <button
               onClick={() => setShowHint(false)}
               style={{
@@ -174,7 +229,7 @@ const NextRoom = () => {
             >
               ×
             </button>
-            Ne celotne zgodovine... Danes je tvoj rojstni dan
+            Veliki srpan
           </div>
         </div>
       )}
@@ -231,7 +286,7 @@ const NextRoom = () => {
             >
               ×
             </button>
-            Napiši mi na FB en fun fact v zameno za namig.
+            MMXXI
           </div>
         </div>
       )}

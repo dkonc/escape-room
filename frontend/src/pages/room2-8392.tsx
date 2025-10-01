@@ -67,7 +67,7 @@ const Room2 = () => {
         if (winner === "X") {
           navigate("/room3-1045");
         } else {
-          navigate("/failed");
+          window.location.reload();
         }
       }, 2000);
     }
@@ -172,13 +172,49 @@ const Room2 = () => {
           >
             {winner === "X" ? (
               <>
-                <p style={{ margin: 0 }}>Zmagala si!</p>
-                <p style={{ margin: 0 }}>Preusmerjena boš...</p>
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: "24px",
+                    fontWeight: "bold",
+                    color: "#000000",
+                  }}
+                >
+                  Zmagal si!
+                </p>
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: "24px",
+                    fontWeight: "bold",
+                    color: "#000000",
+                  }}
+                >
+                  Preusmerjen boš...
+                </p>
               </>
             ) : (
               <>
-                <p style={{ margin: 0 }}>Nisi zmagala!</p>
-                <p style={{ margin: 0 }}>Preusmerjam...</p>
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: "24px",
+                    fontWeight: "bold",
+                    color: "#000000",
+                  }}
+                >
+                  Nisi zmagal!
+                </p>
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: "24px",
+                    fontWeight: "bold",
+                    color: "#000000",
+                  }}
+                >
+                  Poskusi znova...
+                </p>
               </>
             )}
           </div>
