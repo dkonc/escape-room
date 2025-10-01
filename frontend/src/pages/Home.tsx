@@ -1,20 +1,27 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PageWrapper from "../components/PageWrapper";
 import { getGlobalAttempts } from "../attemptsService";
 
 const CookiePopup = () => {
   const [visible, setVisible] = useState(true);
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    // Trigger animation after mount
+    const timer = setTimeout(() => setAnimate(true), 10);
+    return () => clearTimeout(timer);
+  }, []);
 
   if (!visible) return null;
 
   return (
     <div
+      className={animate ? "popup-animate" : ""}
       style={{
         position: "fixed",
-        bottom: 24,
         left: "50%",
+        // Start at bottom, animate to final location
         transform: "translateX(-50%)",
         background: "#fff",
         color: "#880e4f",
@@ -52,6 +59,17 @@ const CookiePopup = () => {
       >
         Sprejmi piškotke
       </button>
+      <style>
+        {`
+          .popup-animate {
+            animation: popupFloatUp 1.2s forwards;
+          }
+          @keyframes popupFloatUp {
+            from { bottom: 16px; }
+            to { bottom: 40%; }
+          }
+        `}
+      </style>
     </div>
   );
 };
@@ -90,10 +108,9 @@ const Home = () => {
       <div
         style={{
           minHeight: "100vh",
-          width: "100vw",
+          width: "200vw",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
           alignItems: "center",
           background: `radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, rgba(71, 152, 255, 0.3) 70%), linear-gradient(135deg, rgb(20, 134, 140) 0%, rgba(58, 91, 190, 0.84) 100%)`,
           color: "#f0e6ff",
@@ -108,8 +125,8 @@ const Home = () => {
           <p
             style={{
               fontSize: "1.25rem",
-              marginTop: "0.5rem",
               color: "rgba(255,255,255,0.95)",
+              width: "800px",
             }}
           >
             Dragi Rok, v nadaljevanju te čaka X ugank, ki bodo razgibale tvoje
@@ -119,32 +136,24 @@ const Home = () => {
             spomin, logiko in druge kognitivne sposobnosti. Brez skrbi – število
             poskusov za reševanje ni omejeno, zato lahko po potrebi večkrat
             premisliš in popravljaš odgovore. 💪 In ne pozabi: na koncu tega
-            »testa« te čaka zaslužena nagrada 🍪 Srečno!
+            »testa« te čaka zaslužena nagrada. Srečno!
           </p>
 
           <button
             type="submit"
             style={{
-              width: "100%",
-              padding: "1rem",
-              marginTop: "1rem",
+              fontSize: "1.25rem",
               borderRadius: "12px",
-              border: "none",
-              fontSize: "1.5rem",
-              backgroundColor: "#fff",
-              color: "#FF6347",
+              backgroundColor: "#880e4f",
+              color: "white",
               fontWeight: "bold",
-              cursor: "pointer",
-              boxShadow: "0 0 10px #fff",
-              transition: "background-color 0.3s ease",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#FFD700";
+              e.currentTarget.style.backgroundColor = "#bc4886ff";
               e.currentTarget.style.color = "#fff";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "#fff";
-              e.currentTarget.style.color = "#FF6347";
+              e.currentTarget.style.backgroundColor = "#880e4f";
             }}
           >
             Nadaljuj
