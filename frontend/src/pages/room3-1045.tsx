@@ -50,9 +50,10 @@ const Room3 = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            justifyContent: "flex-start", // align to top
             gap: "1.25rem",
             width: "100%",
-            maxWidth: "560px",
+            maxWidth: "760px",
           }}
         >
           {/* Question */}
@@ -60,7 +61,7 @@ const Room3 = () => {
             style={{
               margin: 0,
               textAlign: "center",
-              fontSize: "1.5rem",
+              fontSize: "1.2rem",
               width: "100%",
             }}
           >
