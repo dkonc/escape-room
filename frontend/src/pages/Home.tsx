@@ -80,7 +80,7 @@ const Home = () => {
     };
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async () => {
     navigate("/PageDown");
   };
 
