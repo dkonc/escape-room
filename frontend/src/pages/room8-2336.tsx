@@ -113,7 +113,7 @@ const Room8 = () => {
                 position: "relative",
               }}
             >
-              {loading ? "Preverjam" : "Preveri"}
+              {loading ? "Preverjam..." : "Preveri"}
             </button>
           </div>
           {error && (

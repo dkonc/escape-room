@@ -137,7 +137,7 @@ const Room3 = () => {
                 position: "relative",
               }}
             >
-              {loading ? "Preverjam" : "Preveri"}
+              {loading ? "Preverjam..." : "Preveri"}
             </button>
 
             {/* Hint Button */}
