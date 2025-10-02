@@ -7,6 +7,7 @@ const Room8 = () => {
   const [input1, setInput1] = useState("");
   const [error, setError] = useState("");
   const [incorrect, setIncorrect] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   // Automatically clear error after 3 seconds
@@ -19,6 +20,7 @@ const Room8 = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
 
     const val1 = input1.trim().toLowerCase();
 
@@ -39,6 +41,8 @@ const Room8 = () => {
     } catch (err) {
       setError("Poskusi znova.");
       setIncorrect(true);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -97,15 +101,19 @@ const Room8 = () => {
           >
             <button
               type="submit"
+              disabled={loading}
               style={{
                 fontSize: "1.25rem",
                 borderRadius: "12px",
                 backgroundColor: "#880e4f",
                 color: "white",
                 fontWeight: "bold",
+                opacity: loading ? 0.7 : 1,
+                cursor: loading ? "not-allowed" : "pointer",
+                position: "relative",
               }}
             >
-              Preveri
+              {loading ? "Preverjam" : "Preveri"}
             </button>
           </div>
           {error && (

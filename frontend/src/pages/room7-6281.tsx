@@ -12,6 +12,7 @@ const Room7 = () => {
   const [showHint, setShowHint] = useState(false);
   const [hintLoading, setHintLoading] = useState(false);
   const [incorrect, setIncorrect] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   // Automatically clear error after 3 seconds
@@ -28,6 +29,7 @@ const Room7 = () => {
     const val1 = input1.trim().toLowerCase();
     const val2 = input2.trim().toLowerCase();
 
+    setLoading(true); // Start loading
     try {
       const rec1 = await pb.collection("puzzles").getFullList({
         filter: `roomId = "room7-1" && answer = "${val1}"`,
@@ -48,6 +50,8 @@ const Room7 = () => {
     } catch (err) {
       setError("Poskusi znova.");
       setIncorrect(true);
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -138,15 +142,19 @@ const Room7 = () => {
           >
             <button
               type="submit"
+              disabled={hintLoading || loading}
               style={{
                 fontSize: "1.25rem",
                 borderRadius: "12px",
                 backgroundColor: "#880e4f",
                 color: "white",
                 fontWeight: "bold",
+                opacity: loading ? 0.7 : 1,
+                cursor: loading ? "not-allowed" : "pointer",
+                position: "relative",
               }}
             >
-              Preveri
+              {loading ? "Preverjam" : "Preveri"}
             </button>
             <button
               type="button"

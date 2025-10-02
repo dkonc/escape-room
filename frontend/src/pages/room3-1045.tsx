@@ -133,15 +133,11 @@ const Room3 = () => {
                 cursor: loading ? "not-allowed" : "pointer",
                 fontWeight: "bold",
                 transition: "background-color 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                if (!loading) e.currentTarget.style.backgroundColor = "#a33274";
-              }}
-              onMouseLeave={(e) => {
-                if (!loading) e.currentTarget.style.backgroundColor = "#880e4f";
+                opacity: loading ? 0.7 : 1,
+                position: "relative",
               }}
             >
-              Preveri
+              {loading ? "Preverjam" : "Preveri"}
             </button>
 
             {/* Hint Button */}

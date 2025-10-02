@@ -13,6 +13,7 @@ const NextRoom = () => {
   const [showHint2, setShowHint2] = useState(false);
   const [monthIncorrect, setMonthIncorrect] = useState(false);
   const [yearIncorrect, setYearIncorrect] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   // Automatically clear error after 3 seconds
@@ -25,6 +26,7 @@ const NextRoom = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
 
     const normalizedMonth = month.trim().toLowerCase();
     const normalizedYear = year.trim().toLowerCase();
@@ -58,6 +60,8 @@ const NextRoom = () => {
       setError("Poskusi znova.");
       setMonthIncorrect(false);
       setYearIncorrect(false);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -142,6 +146,7 @@ const NextRoom = () => {
           >
             <button
               type="submit"
+              disabled={loading}
               style={{
                 padding: "1rem",
                 fontSize: "1.25rem",
@@ -149,9 +154,12 @@ const NextRoom = () => {
                 backgroundColor: "#880e4f",
                 color: "white",
                 fontWeight: "bold",
+                opacity: loading ? 0.7 : 1,
+                cursor: loading ? "not-allowed" : "pointer",
+                position: "relative",
               }}
             >
-              Preveri
+              {loading ? "Preverjam..." : "Preveri"}
             </button>
             <button
               type="button"
