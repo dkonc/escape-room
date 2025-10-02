@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 
@@ -13,6 +13,14 @@ const Room4: React.FC = () => {
   const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
+
+  // Automatically clear message after 3 seconds
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => setMessage(""), 700);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
 
   const toggleCountry = (countryName: string) => {
     if (selected.has(countryName)) {
@@ -38,7 +46,7 @@ const Room4: React.FC = () => {
   return (
     <div style={{ padding: "2rem", textAlign: "center" }}>
       <p>Pa da vidimo kako ti gre geografija, skupaj z zgodovino!</p>
-      <h1>
+      <h1 style={{ fontSize: "1.5rem" }}>
         V kateri državi sva bila prvič na skupni službeni poti (Slovenija ne
         šteje)? Izberi na zemljevidu.
       </h1>
@@ -55,7 +63,7 @@ const Room4: React.FC = () => {
         }}
       >
         {/* Map */}
-        <div style={{ maxWidth: 900, width: "100%" }}>
+        <div style={{ maxWidth: 600, width: "80%" }}>
           <ComposableMap
             projection="geoMercator"
             projectionConfig={{ scale: 600, center: [20, 55] }}

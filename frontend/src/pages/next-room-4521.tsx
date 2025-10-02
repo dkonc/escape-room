@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import pb from "../pb";
 import PageWrapper from "../components/PageWrapper";
@@ -14,6 +14,14 @@ const NextRoom = () => {
   const [monthIncorrect, setMonthIncorrect] = useState(false);
   const [yearIncorrect, setYearIncorrect] = useState(false);
   const navigate = useNavigate();
+
+  // Automatically clear error after 3 seconds
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => setError(""), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -85,40 +93,45 @@ const NextRoom = () => {
             Katerega meseca in katerega leta sem se kot študentka pridružila
             Innbox ekipi?
           </h1>
-          <p>Sem vnesi mesec:</p>
-          <input
-            type="text"
-            value={month}
-            onChange={(e) => setMonth(e.target.value)}
-            style={{
-              padding: "1rem",
-              borderRadius: "12px",
-              fontSize: "1.25rem",
-              width: "100%",
-              marginTop: "1rem",
-              border: monthIncorrect
-                ? "2px solid #d81b60"
-                : "2px solid #880e4f",
-              background: monthIncorrect ? "#fce4ec" : "#fff",
-              transition: "border 0.2s, background 0.2s",
-            }}
-          />
-          <p>Sem vnesi leto:</p>
-          <input
-            type="text"
-            value={year}
-            onChange={(e) => setYear(e.target.value)}
-            style={{
-              padding: "1rem",
-              borderRadius: "12px",
-              fontSize: "1.25rem",
-              width: "100%",
-              marginTop: "1rem",
-              border: yearIncorrect ? "2px solid #d81b60" : "2px solid #880e4f",
-              background: yearIncorrect ? "#fce4ec" : "#fff",
-              transition: "border 0.2s, background 0.2s",
-            }}
-          />
+          <div>
+            <p>Sem vnesi mesec:</p>
+            <input
+              type="text"
+              value={month}
+              onChange={(e) => setMonth(e.target.value)}
+              style={{
+                padding: "0.6rem",
+                borderRadius: "12px",
+                fontSize: "1.25rem",
+                width: "50%",
+                marginTop: "1rem",
+                border: monthIncorrect
+                  ? "2px solid #d81b60"
+                  : "2px solid #880e4f",
+                background: monthIncorrect ? "#fce4ec" : "#fff",
+                transition: "border 0.2s, background 0.2s",
+              }}
+            />
+            <p>Sem vnesi leto:</p>
+            <input
+              type="text"
+              value={year}
+              onChange={(e) => setYear(e.target.value)}
+              style={{
+                padding: "0.6rem",
+                borderRadius: "12px",
+                fontSize: "1.25rem",
+                width: "50%",
+                marginTop: "1rem",
+                border: yearIncorrect
+                  ? "2px solid #d81b60"
+                  : "2px solid #880e4f",
+                background: yearIncorrect ? "#fce4ec" : "#fff",
+                transition: "border 0.2s, background 0.2s",
+              }}
+            />
+          </div>
+
           <div
             style={{
               display: "flex",
@@ -183,6 +196,8 @@ const NextRoom = () => {
                 marginTop: "1rem",
                 fontSize: "24px",
                 fontWeight: "bold",
+                transition: "opacity 0.5s",
+                opacity: error ? 1 : 0,
               }}
             >
               {error}
@@ -229,7 +244,7 @@ const NextRoom = () => {
                 onClick={() => setShowHint(false)}
                 style={{
                   position: "absolute",
-                  top: "0.75rem",
+                  top: "-0.75rem",
                   right: "1rem",
                   background: "none",
                   border: "none",
@@ -266,7 +281,7 @@ const NextRoom = () => {
             <div
               style={{
                 background: "#fff",
-                color: "#0d47a1",
+                color: "#880e4f",
                 padding: "2rem",
                 borderRadius: "16px",
                 boxShadow: "0 4px 32px #0004",
@@ -286,12 +301,12 @@ const NextRoom = () => {
                 onClick={() => setShowHint2(false)}
                 style={{
                   position: "absolute",
-                  top: "0.75rem",
+                  top: "-0.75rem",
                   right: "1rem",
                   background: "none",
                   border: "none",
                   fontSize: "1.5rem",
-                  color: "#0d47a1",
+                  color: "#880e4f",
                   cursor: "pointer",
                   lineHeight: 1,
                 }}

@@ -109,12 +109,13 @@ const Room2 = () => {
     <PageWrapper>
       <div
         style={{
+          minHeight: "100vh",
+          width: "100%",
           display: "flex",
           flexDirection: "column",
+          padding: "8rem",
           alignItems: "center",
-          gap: "1rem",
-          width: "100%",
-          maxWidth: "400px",
+          justifyContent: "flex-start", // stick to top
         }}
       >
         {/* Title */}
@@ -174,7 +175,7 @@ const Room2 = () => {
               <>
                 <p
                   style={{
-                    margin: 0,
+                    margin: 20,
                     fontSize: "24px",
                     fontWeight: "bold",
                     color: "#000000",
@@ -184,7 +185,7 @@ const Room2 = () => {
                 </p>
                 <p
                   style={{
-                    margin: 0,
+                    margin: 20,
                     fontSize: "24px",
                     fontWeight: "bold",
                     color: "#000000",
@@ -197,7 +198,7 @@ const Room2 = () => {
               <>
                 <p
                   style={{
-                    margin: 0,
+                    margin: 20,
                     fontSize: "24px",
                     fontWeight: "bold",
                     color: "#000000",
@@ -207,7 +208,7 @@ const Room2 = () => {
                 </p>
                 <p
                   style={{
-                    margin: 0,
+                    margin: 20,
                     fontSize: "24px",
                     fontWeight: "bold",
                     color: "#000000",

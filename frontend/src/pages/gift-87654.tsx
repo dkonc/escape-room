@@ -5,25 +5,23 @@ import giftBoxAnimation from "../assets/Gift-Box.json";
 
 const Gift = () => {
   const [showPopup, setShowPopup] = useState(false);
+  const [isFrozen, setIsFrozen] = useState(false);
   const lottieRef = useRef<LottieRefCurrentProps>(null);
 
-  // Show popup 1 second before animation ends
-  const handleLottieComplete = () => {
-    setShowPopup(true);
-  };
-
+  // Freeze animation at frame 65
   const handleLottieEnterFrame = (e: any) => {
-    // BMEnterFrameEvent should have currentTime property
-    const totalFrames = lottieRef.current?.getDuration(true);
     const currentFrame = e?.currentTime;
-    // Show popup 1 second before end (assuming 60fps)
-    if (
-      totalFrames &&
-      typeof currentFrame === "number" &&
-      currentFrame >= totalFrames - 60 &&
-      !showPopup
-    ) {
+
+    if (currentFrame >= 40.5) {
       setShowPopup(true);
+    }
+
+    if (typeof currentFrame === "number" && currentFrame >= 65 && !isFrozen) {
+      setShowPopup(true);
+      lottieRef.current?.pause();
+      lottieRef.current?.goToAndStop(65, true);
+
+      setIsFrozen(true);
     }
   };
 
@@ -50,7 +48,6 @@ const Gift = () => {
           maxWidth: "90vw",
           maxHeight: "90vh",
         }}
-        onComplete={handleLottieComplete}
         onEnterFrame={handleLottieEnterFrame}
       />
       {showPopup && (
