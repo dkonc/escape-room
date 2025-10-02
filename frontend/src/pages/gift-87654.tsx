@@ -82,7 +82,7 @@ const Gift = () => {
               transform: "translateX(-50%)",
               borderRadius: "16px",
               padding: "18px 32px",
-              fontSize: "2rem",
+              fontSize: "1.5rem",
               color: "#000000ff",
               fontWeight: "bold",
               textAlign: "center",
