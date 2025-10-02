@@ -78,11 +78,11 @@ const Gift = () => {
             style={{
               position: "fixed",
               left: "50%",
-              bottom: "1%",
+              bottom: "5%",
               transform: "translateX(-50%)",
               borderRadius: "16px",
               padding: "18px 32px",
-              fontSize: "1.5rem",
+              fontSize: "1.3rem",
               color: "#000000ff",
               fontWeight: "bold",
               textAlign: "center",
