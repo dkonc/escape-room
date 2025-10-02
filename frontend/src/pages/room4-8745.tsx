@@ -63,7 +63,7 @@ const Room4: React.FC = () => {
         }}
       >
         {/* Map */}
-        <div style={{ maxWidth: 750, width: "90%" }}>
+        <div style={{ maxWidth: 700, width: "80%" }}>
           <ComposableMap
             projection="geoMercator"
             projectionConfig={{ scale: 600, center: [20, 55] }}
