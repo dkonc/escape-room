@@ -28,7 +28,8 @@ const Home = () => {
         >
           Ko sem ga poskusil nastaviti, je vskočil Nero in naredil pravo
           zmešnjavo... Na žalost nisem imel veliko časa, da bi ga popravil, zato
-          te lahko samo usmerim na pravo smer...
+          te lahko samo usmerim na pravo smer... Rešitev se nahaja v ORANŽNIH
+          MALIH škatlicah... Najdi jih in darilo bo tvoje :D
         </p>
 
         <div style={{ margin: "2rem 0", width: "100%", maxWidth: "800px" }}>
