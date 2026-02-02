@@ -7,8 +7,6 @@ const Home = () => {
   const [error, setError] = useState("");
   const [, setAttempts] = useState<number | null>(null);
   const navigate = useNavigate();
-  const [cookieVisible, setCookieVisible] = useState(true);
-  const [cookieAnimate, setCookieAnimate] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -24,12 +22,6 @@ const Home = () => {
     return () => {
       isMounted = false;
     };
-  }, []);
-
-  useEffect(() => {
-    // Trigger animation after mount
-    const timer = setTimeout(() => setCookieAnimate(true), 10);
-    return () => clearTimeout(timer);
   }, []);
 
   const handleSubmit = async () => {
@@ -53,115 +45,30 @@ const Home = () => {
           position: "relative",
         }}
       >
-        {/* Cookie Popup centered above the main text */}
-        {cookieVisible && (
-          <div
-            className={cookieAnimate ? "popup-animate" : ""}
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: "0",
-              transform: "translateX(-50%)",
-              background: "#fff",
-              color: "#880e4f",
-              borderRadius: 16,
-              boxShadow: "0 2px 16px #0002",
-              padding: "20px 32px",
-              zIndex: 9999,
-              maxWidth: 340,
-              textAlign: "center",
-              fontSize: "1.05em",
-              border: "2px solid #880e4f",
-            }}
-          >
-            <div>
-              To rojstnodnevno darilo uporablja čokoladne piškotke za
-              zagotavljanje boljše uporabniške (Rokove) izkušnje.
-              <br />
-              <br />S klikom na spodnji gumb potrjuješ prejem prvega darila:
-              “Anini home-made čokoladni piškotki”.
-            </div>
-            <button
-              style={{
-                marginTop: 18,
-                padding: "10px 22px",
-                borderRadius: 10,
-                border: "none",
-                background: "#880e4f",
-                color: "#fff",
-                fontWeight: "bold",
-                fontSize: "1em",
-                cursor: "pointer",
-                boxShadow: "0 1px 6px #880e4f33",
-              }}
-              onClick={() => setCookieVisible(false)}
-            >
-              Sprejmi piškotke
-            </button>
-            <style>
-              {`
-                .popup-animate {
-                  animation: popupFloatDown 2.0s forwards;
-                }
-                @keyframes popupFloatDown {
-                  from { top: -220px; opacity: 0; }
-                  to { top: 180px; opacity: 1; }
-                }
-              `}
-            </style>
-          </div>
-        )}
-
-        <form
-          onSubmit={handleSubmit}
-          style={{ maxWidth: 400, width: "100%", marginTop: "120px" }}
+        <h1>Vse najboljše! Sem se želel potruditi za darilo, ampak...</h1>
+        <p
+          style={{
+            fontSize: "1.25rem",
+            color: "rgba(255,255,255,0.95)",
+            width: "800px",
+          }}
         >
-          <h1>
-            Vse najboljše! Na žalost se je tvoje darilo ujelo v mrežo ugank...
-          </h1>
-          <p
-            style={{
-              fontSize: "1.25rem",
-              color: "rgba(255,255,255,0.95)",
-              width: "800px",
-            }}
-          >
-            Dragi Rok, v nadaljevanju te čaka 9 ugank, ki bodo razgibale tvoje
-            (sedaj že nekoliko starejše) možgančke. 😉 Nekatera vprašanja so
-            osebna in se nanašajo na naju, druga pa so bolj matematične ali
-            logične narave. Saj veš – cilj ni le zabava, ampak tudi preizkusiti
-            spomin, logiko in druge kognitivne sposobnosti. Brez skrbi – število
-            poskusov za reševanje ni omejeno, zato lahko po potrebi večkrat
-            premisliš in popravljaš odgovore. 💪 In ne pozabi: na koncu tega
-            »testa« te čaka zaslužena nagrada. Srečno!
-          </p>
+          Ko sem ga poskusil nastaviti, je vskočil Nero in naredil pravo
+          zmešnjavo... Na žalost nisem imel veliko časa, da bi ga popravil, zato
+          te lahko samo usmerim na pravo smer...
+        </p>
 
-          <button
-            type="submit"
-            style={{
-              fontSize: "1.25rem",
-              borderRadius: "12px",
-              backgroundColor: "#880e4f",
-              color: "white",
-              fontWeight: "bold",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#bc4886ff";
-              e.currentTarget.style.color = "#fff";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "#880e4f";
-            }}
-          >
-            Nadaljuj
-          </button>
-
-          {error && (
-            <p style={{ color: "rgba(255, 100, 100, 0.9)", marginTop: "1rem" }}>
-              {error}
-            </p>
-          )}
-        </form>
+        <div style={{ margin: "2rem 0", width: "100%", maxWidth: "800px" }}>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d696.3147238472547!2d14.293241597850486!3d46.25568726664178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDbCsDE1JzIwLjUiTiAxNMKwMTcnMzYuNiJF!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
+            width="100%"
+            height="450"
+            style={{ border: 0, borderRadius: "12px" }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
       </div>
     </PageWrapper>
   );
