@@ -1,33 +1,6 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import PageWrapper from "../components/PageWrapper";
-import { getGlobalAttempts } from "../attemptsService";
 
 const Home = () => {
-  const [error, setError] = useState("");
-  const [, setAttempts] = useState<number | null>(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    let isMounted = true;
-    const loadAttempts = async () => {
-      try {
-        const count = await getGlobalAttempts();
-        if (isMounted) setAttempts(count);
-      } catch {
-        if (isMounted) setError("Failed to load attempt counter.");
-      }
-    };
-    loadAttempts();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  const handleSubmit = async () => {
-    navigate("/PageDown");
-  };
-
   return (
     <PageWrapper>
       <div
